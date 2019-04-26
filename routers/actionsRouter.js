@@ -1,5 +1,6 @@
 const express = require('express')
 const db = require('../data/helpers/actionModel') 
+const projects = require('../data/helpers/projectModel') 
 
 const router = express.Router()
 
@@ -36,6 +37,10 @@ router.get('/:id', async(req, res) => {
 
 router.post('/', async(req, res) => {
     console.log(req.body)
+    const project = await projects.get(req.body.project_id)
+    if(!project) {
+        res.status(404).json({errorMessage: "Project Not Found"})
+    }
     try {
 
         const result = await db.insert(req.body)
