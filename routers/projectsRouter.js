@@ -65,20 +65,25 @@ router.post('/', async(req, res) => {
         }
 
     } catch (err) {
+        console.log(err.code)
         res.status(500).json({errorMessage: 'Internal Server Error'})
     }
 })
 
 router.put('/:id', async(req, res) => {
-
+    if (!req.body.name || !req.body.description) {
+        res.status(400).json('Name is required')
+    }
     try {
         const result = await db.update(req.params.id, req.body)
         if (result) {
             res.status(202).json(result)
-        } else {
-            res.status(400).json('Data Not Updated')
-        }
+        } 
+        // else {
+        //     res.status(400).json('Data Not Updated')
+        // }
     } catch (err) {
+        console.log(err)
         res.status(500).json({errorMessage: 'Internal Server Error'})
     }
 })
@@ -87,9 +92,9 @@ router.delete('/:id', async(req, res) => {
     try {
         const result = await db.remove(req.params.id)
         res.status(202).json(result)
-
     } catch (err) {
-        res.status(500).json({errorMessage: 'Internal Server Error'})
+        console.log(err)
+        res.status(500).json({errorMessage: err.message})
     }
 })
 

@@ -30,7 +30,7 @@ creating an API server, creating custom middleware
 - [ ] Describe Middleware?
 programs that add different functionalities to existing functionalities and also keep them seperate, ex: a middleware that logs all the http requests, and response to the users, a middleware that check for authorization from http requests 
 
-- [ ] Describe a Resource? existing functionalities that user can take advantage of
+- [ ] Describe a Resource? existing models that user can take advantage of
 
 - [ ] What can the API return to help clients know if a request was successful? status 200
 
